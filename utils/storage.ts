@@ -71,6 +71,7 @@ export const userStorage = {
     // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, 200));
     
+    // Get existing users
     const users = await getStorageData<User>(STORAGE_KEYS.USERS, []);
     
     // Check if email already exists
@@ -148,6 +149,181 @@ export const userStorage = {
 };
 
 /**
+ * Product storage operations
+ */
+export const productStorage = {
+  /**
+   * Get all products
+   */
+  getAll: async (): Promise<Product[]> => {
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 100));
+    return await getStorageData<Product>(STORAGE_KEYS.PRODUCTS, []);
+  },
+
+  /**
+   * Get product by ID
+   */
+  getById: async (id: string): Promise<Product | undefined> => {
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 100));
+    const products = await getStorageData<Product>(STORAGE_KEYS.PRODUCTS, []);
+    return products.find(p => p.id === id);
+  },
+
+  /**
+   * Get product by SKU
+   */
+  getBySku: async (sku: string): Promise<Product | undefined> => {
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 100));
+    const products = await getStorageData<Product>(STORAGE_KEYS.PRODUCTS, []);
+    return products.find(p => p.sku.toLowerCase() === sku.toLowerCase());
+  },
+
+  /**
+   * Create a new product
+   */
+  create: async (
+    sku: string,
+    name: string,
+    price: number,
+    quantity: number,
+    userId: string
+  ): Promise<Product> => {
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 200));
+
+    // Get existing products
+    const products = await getStorageData<Product>(STORAGE_KEYS.PRODUCTS, []);
+
+    // Check if SKU already exists
+    const existingProduct = products.find(p => p.sku.toLowerCase() === sku.toLowerCase());
+    if (existingProduct) {
+      throw new Error('SKU already exists');
+    }
+
+    const newProduct: Product = {
+      id: generateId(),
+      sku: sku.trim().toUpperCase(),
+      name: name.trim(),
+      price,
+      quantity,
+      lastUpdated: new Date().toISOString(),
+      createdBy: userId,
+    };
+
+    // Save product
+    products.push(newProduct);
+    await saveStorageData(STORAGE_KEYS.PRODUCTS, products);
+
+    // Create transaction record
+    const transactions = await getStorageData<Transaction>(STORAGE_KEYS.TRANSACTIONS, []);
+    const transaction: Transaction = {
+      id: generateId(),
+      productId: newProduct.id,
+      productSku: newProduct.sku,
+      productName: newProduct.name,
+      type: 'create',
+      quantity,
+      previousQuantity: 0,
+      newQuantity: quantity,
+      timestamp: newProduct.lastUpdated,
+      userId,
+    };
+
+    transactions.push(transaction);
+    await saveStorageData(STORAGE_KEYS.TRANSACTIONS, transactions);
+
+    return newProduct;
+  },
+
+  /**
+   * Update product quantity
+   */
+  updateQuantity: async (
+    id: string,
+    change: number,
+    userId: string
+  ): Promise<Product> => {
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 200));
+
+    // Get existing products
+    const products = await getStorageData<Product>(STORAGE_KEYS.PRODUCTS, []);
+    const productIndex = products.findIndex(p => p.id === id);
+    
+    if (productIndex === -1) {
+      throw new Error('Product not found');
+    }
+
+    const product = products[productIndex];
+    const previousQuantity = product.quantity;
+    const newQuantity = previousQuantity + change;
+
+    if (newQuantity < 0) {
+      throw new Error('Quantity cannot be negative');
+    }
+
+    // Update product
+    product.quantity = newQuantity;
+    product.lastUpdated = new Date().toISOString();
+    products[productIndex] = product;
+    await saveStorageData(STORAGE_KEYS.PRODUCTS, products);
+
+    // Create transaction record
+    const transactions = await getStorageData<Transaction>(STORAGE_KEYS.TRANSACTIONS, []);
+    const transaction: Transaction = {
+      id: generateId(),
+      productId: product.id,
+      productSku: product.sku,
+      productName: product.name,
+      type: change > 0 ? 'increase' : 'decrease',
+      quantity: Math.abs(change),
+      previousQuantity,
+      newQuantity,
+      timestamp: product.lastUpdated,
+      userId,
+    };
+
+    transactions.push(transaction);
+    await saveStorageData(STORAGE_KEYS.TRANSACTIONS, transactions);
+
+    return product;
+  },
+
+  /**
+   * Update product (for future use)
+   */
+  update: async (id: string, updates: Partial<Product>): Promise<Product> => {
+    const products = await getStorageData<Product>(STORAGE_KEYS.PRODUCTS, []);
+    const productIndex = products.findIndex(p => p.id === id);
+    
+    if (productIndex === -1) {
+      throw new Error('Product not found');
+    }
+
+    products[productIndex] = {
+      ...products[productIndex],
+      ...updates,
+      lastUpdated: new Date().toISOString(),
+    };
+    
+    await saveStorageData(STORAGE_KEYS.PRODUCTS, products);
+    return products[productIndex];
+  },
+
+  /**
+   * Delete product (for future use)
+   */
+  delete: async (id: string): Promise<void> => {
+    const products = await getStorageData<Product>(STORAGE_KEYS.PRODUCTS, []);
+    const filteredProducts = products.filter(p => p.id !== id);
+    await saveStorageData(STORAGE_KEYS.PRODUCTS, filteredProducts);
+  },
+};
+
+/**
  * Authentication storage operations
  */
 export const authStorage = {
@@ -220,6 +396,47 @@ export const authStorage = {
     } catch (error) {
       return false;
     }
+  },
+};
+
+/**
+ * Transaction storage operations
+ */
+export const transactionStorage = {
+  /**
+   * Get all transactions (sorted by timestamp, newest first)
+   */
+  getAll: async (): Promise<Transaction[]> => {
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 100));
+    const transactions = await getStorageData<Transaction>(STORAGE_KEYS.TRANSACTIONS, []);
+    return transactions.sort((a, b) => 
+      new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+    );
+  },
+
+  /**
+   * Get transactions by product ID (sorted by timestamp, newest first)
+   */
+  getByProductId: async (productId: string): Promise<Transaction[]> => {
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 100));
+    const transactions = await getStorageData<Transaction>(STORAGE_KEYS.TRANSACTIONS, []);
+    return transactions
+      .filter(t => t.productId === productId)
+      .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+  },
+
+  /**
+   * Get transactions by user ID (sorted by timestamp, newest first)
+   */
+  getByUserId: async (userId: string): Promise<Transaction[]> => {
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 100));
+    const transactions = await getStorageData<Transaction>(STORAGE_KEYS.TRANSACTIONS, []);
+    return transactions
+      .filter(t => t.userId === userId)
+      .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
   },
 };
 

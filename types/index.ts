@@ -20,6 +20,18 @@ export interface Product {
   createdBy: string; // User ID
 }
 
+export interface Transaction {
+  id: string;
+  productId: string;
+  productSku: string;
+  productName: string;
+  type: 'increase' | 'decrease' | 'create';
+  quantity: number;
+  previousQuantity: number;
+  newQuantity: number;
+  timestamp: string;
+  userId: string;
+}
 
 export interface FormErrors {
   [key: string]: string;
