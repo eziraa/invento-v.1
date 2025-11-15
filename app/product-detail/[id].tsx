@@ -14,6 +14,7 @@ import { formatCurrency, formatNumber } from '@/utils/formatting';
 import { formatDateTime } from '@/utils/time';
 import { Transaction } from '@/types';
 import { Ionicons } from '@expo/vector-icons';
+import { Header } from '@/components/Header';
 
 export default function ProductDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -114,16 +115,16 @@ export default function ProductDetailScreen() {
   const status = getStockStatus();
 
   return (
-    <ScrollView className="flex-1 bg-gray-50">
+    <View className="flex-1 bg-gray-50">
+      <Header 
+        title={product.name} 
+        showBack={true}
+        subtitle={`SKU: ${product.sku}`}
+      />
+      <ScrollView className="flex-1">
       {/* Product Info Card */}
-      <View className="bg-white rounded-b-3xl shadow-lg p-6 mb-4">
-        <View className="flex-row justify-between items-start mb-4">
-          <View className="flex-1">
-            <Text className="text-2xl font-bold text-gray-900 mb-2">
-              {product.name}
-            </Text>
-            <Text className="text-base text-gray-500 mb-4">SKU: {product.sku}</Text>
-          </View>
+      <View className="bg-white rounded-xl shadow-lg p-6 mb-4 mx-4 mt-4">
+        <View className="flex-row justify-end items-start mb-4">
           <View className={`px-3 py-2 rounded-lg border ${status.color}`}>
             <Text className="text-sm font-semibold">{status.text}</Text>
           </View>
@@ -355,7 +356,8 @@ export default function ProductDetailScreen() {
           )}
         </View>
       </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 }
 

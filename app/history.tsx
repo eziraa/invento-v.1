@@ -9,6 +9,7 @@ import { useTransactions } from '@/hooks/useTransactions';
 import { Pagination } from '@/components/Pagination';
 import { Transaction } from '@/types';
 import { formatDateTime } from '@/utils/time';
+import { Header } from '@/components/Header';
 
 export default function HistoryScreen() {
   const {
@@ -85,14 +86,11 @@ export default function HistoryScreen() {
 
   return (
     <View className="flex-1 bg-gray-50">
-      <View className="bg-primary-600 px-6 pt-16 pb-6">
-        <Text className="text-white text-2xl font-bold mb-1">
-          Transaction History
-        </Text>
-        <Text className="text-primary-100 text-sm">
-          {allTransactions.length} total {allTransactions.length === 1 ? 'transaction' : 'transactions'}
-        </Text>
-      </View>
+      <Header 
+        title="Transaction History" 
+        subtitle={`${allTransactions.length} total ${allTransactions.length === 1 ? 'transaction' : 'transactions'}`}
+        showBack={true}
+      />
 
       {allTransactions.length === 0 ? (
         <View className="flex-1 items-center justify-center p-6">

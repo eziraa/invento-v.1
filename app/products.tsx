@@ -10,6 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useProducts } from '@/hooks/useProducts';
 import { ProductCard } from '@/components/ProductCard';
 import { Button } from '@/components/Button';
+import { Header } from '@/components/Header';
 
 export default function ProductsScreen() {
   const router = useRouter();
@@ -49,18 +50,11 @@ export default function ProductsScreen() {
 
   return (
     <View className="flex-1 bg-gray-50">
-      <View className="bg-primary-600 px-6 pt-16 pb-6">
-        <View className="flex-row justify-between items-center">
-          <View>
-            <Text className="text-white text-2xl font-bold mb-1">
-              Products
-            </Text>
-            <Text className="text-primary-100 text-sm">
-              {products.length} {products.length === 1 ? 'product' : 'products'} in inventory
-            </Text>
-          </View>
-        </View>
-      </View>
+      <Header 
+        title="Products" 
+        subtitle={`${products.length} ${products.length === 1 ? 'product' : 'products'} in inventory`}
+        showBack={true}
+      />
 
       {products.length === 0 ? (
         <View className="flex-1 items-center justify-center p-6">

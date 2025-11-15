@@ -8,6 +8,7 @@ import { useRouter } from 'expo-router';
 import React, { useEffect } from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { Header } from '@/components/Header';
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -67,34 +68,10 @@ export default function HomeScreen() {
 
   return (
     <View className="flex-1 bg-gray-50">
-      {/* Header Section */}
-      <View className="bg-primary-600 px-6 pt-16 pb-8">
-        <Text className="text-white text-3xl font-bold mb-2">
-          Inventory Management
-        </Text>
-        {user ? (
-          <View className="mt-2">
-            <Text className="text-primary-100 text-sm">Logged in as:</Text>
-            <Text className="text-white text-lg font-semibold">
-              {user.fullName}
-            </Text>
-            <Text className="text-primary-100 text-sm">{user.email}</Text>
-            <TouchableOpacity
-              onPress={async () => {
-                await logout();
-                router.replace('/login');
-              }}
-              className="mt-2 self-start"
-            >
-              <Text className="text-primary-200 text-sm underline">Logout</Text>
-            </TouchableOpacity>
-          </View>
-        ) : (
-          <Text className="text-primary-100 text-sm mt-2">
-            Please login to continue
-          </Text>
-        )}
-      </View>
+      <Header 
+        title="Inventory Management" 
+        subtitle={user ? `Welcome, ${user.fullName}` : undefined}
+      />
 
       {/* Menu Grid */}
       <ScrollView className="flex-1 px-4 py-6">
