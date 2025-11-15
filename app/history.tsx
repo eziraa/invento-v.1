@@ -163,9 +163,15 @@ export default function HistoryScreen() {
                   </View>
                   <View className="items-end">
                     <Text className="text-sm text-gray-600">Stock Level</Text>
-                    <Text className="text-lg font-semibold text-gray-900">
-                      {transaction.previousQuantity} → {transaction.newQuantity}
-                    </Text>
+                    <View className="flex-row items-center">
+                      <Text className="text-lg font-semibold text-gray-900">
+                        {transaction.previousQuantity}
+                      </Text>
+                      <Ionicons name="arrow-forward" size={14} color="#6b7280" style={{ marginHorizontal: 4 }} />
+                      <Text className="text-lg font-semibold text-gray-900">
+                        {transaction.newQuantity}
+                      </Text>
+                    </View>
                   </View>
                 </View>
 

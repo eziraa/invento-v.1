@@ -6,6 +6,7 @@ import * as React from 'react';
 import  { useEffect } from 'react';
 import { View, Text, ScrollView, RefreshControl, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 import { useProducts } from '@/hooks/useProducts';
 import { ProductCard } from '@/components/ProductCard';
 import { Button } from '@/components/Button';
@@ -63,8 +64,8 @@ export default function ProductsScreen() {
 
       {products.length === 0 ? (
         <View className="flex-1 items-center justify-center p-6">
-          <Text className="text-6xl mb-4">📦</Text>
-          <Text className="text-xl font-bold text-gray-900 mb-2">
+          <Ionicons name="cube-outline" size={80} color="#9ca3af" />
+          <Text className="text-xl font-bold text-gray-900 mb-2 mt-4">
             No Products Yet
           </Text>
           <Text className="text-gray-600 text-center mb-6">

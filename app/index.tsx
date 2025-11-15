@@ -7,6 +7,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useRouter } from 'expo-router';
 import React, { useEffect } from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -33,26 +34,32 @@ export default function HomeScreen() {
     return null;
   }
 
-  const menuItems = [
+  const menuItems: Array<{
+    title: string;
+    description: string;
+    route: string;
+    icon: keyof typeof Ionicons.glyphMap;
+    color: string;
+  }> = [
     {
       title: 'Add Product',
       description: 'Register a new product',
       route: '/add-product',
-      icon: '📦',
+      icon: 'add-circle',
       color: 'bg-green-500',
     },
     {
       title: 'View Products',
       description: 'Browse all products',
       route: '/products',
-      icon: '📋',
+      icon: 'list',
       color: 'bg-purple-500',
     },
     {
       title: 'Transaction History',
       description: 'View all stock changes',
       route: '/history',
-      icon: '📊',
+      icon: 'bar-chart',
       color: 'bg-orange-500',
     },
   ];
@@ -101,7 +108,7 @@ export default function HomeScreen() {
               >
                 <View className="flex-row items-center">
                   <View className={`${item.color} w-16 h-16 rounded-full items-center justify-center mr-4`}>
-                    <Text className="text-3xl">{item.icon}</Text>
+                    <Ionicons name={item.icon} size={32} color="#ffffff" />
                   </View>
                   <View className="flex-1">
                     <Text className="text-xl font-bold text-gray-900 mb-1">
@@ -111,7 +118,7 @@ export default function HomeScreen() {
                       {item.description}
                     </Text>
                   </View>
-                  <Text className="text-gray-400 text-2xl">→</Text>
+                  <Ionicons name="chevron-forward" size={24} color="#9ca3af" />
                 </View>
               </TouchableOpacity>
             );

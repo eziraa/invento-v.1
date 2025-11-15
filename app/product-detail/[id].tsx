@@ -13,6 +13,7 @@ import { Button } from '@/components/Button';
 import { formatCurrency, formatNumber } from '@/utils/formatting';
 import { formatDateTime } from '@/utils/time';
 import { Transaction } from '@/types';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function ProductDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -288,9 +289,15 @@ export default function ProductDetailScreen() {
                     </View>
                   </View>
                   <View className="flex-row justify-between items-center mt-1">
-                    <Text className="text-xs text-gray-500">
-                      {transaction.previousQuantity} → {transaction.newQuantity}
-                    </Text>
+                    <View className="flex-row items-center">
+                      <Text className="text-xs text-gray-500">
+                        {transaction.previousQuantity}
+                      </Text>
+                      <Ionicons name="arrow-forward" size={12} color="#6b7280" style={{ marginHorizontal: 4 }} />
+                      <Text className="text-xs text-gray-500">
+                        {transaction.newQuantity}
+                      </Text>
+                    </View>
                     <Text className="text-xs text-gray-500">
                       {formatDateTime(transaction.timestamp)}
                     </Text>
