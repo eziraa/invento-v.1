@@ -63,7 +63,7 @@ export const Pagination: React.FC<PaginationProps> = ({
     <View className="flex-row items-center justify-center py-4">
       <TouchableOpacity
         onPress={onPrevious}
-        disabled={currentPage === 1}
+        disabled={!!(currentPage === 1)}
         className={`px-4 py-2 rounded-lg mr-2 ${
           currentPage === 1
             ? 'bg-gray-200 opacity-50'
@@ -116,7 +116,7 @@ export const Pagination: React.FC<PaginationProps> = ({
 
       <TouchableOpacity
         onPress={onNext}
-        disabled={currentPage === totalPages}
+        disabled={!!(currentPage === totalPages)}
         className={`px-4 py-2 rounded-lg ml-2 ${
           currentPage === totalPages
             ? 'bg-gray-200 opacity-50'

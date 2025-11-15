@@ -4,6 +4,7 @@
 
 import React, { useEffect } from 'react';
 import { View, Text, ScrollView, RefreshControl, ActivityIndicator } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { useTransactions } from '@/hooks/useTransactions';
 import { Pagination } from '@/components/Pagination';
 import { Transaction } from '@/types';
@@ -39,13 +40,13 @@ export default function HistoryScreen() {
   const getTransactionIcon = (type: Transaction['type']) => {
     switch (type) {
       case 'create':
-        return '✨';
+        return <Ionicons name="sparkles" size={24} color="#3b82f6" />;
       case 'increase':
-        return '📈';
+        return <Ionicons name="trending-up" size={24} color="#22c55e" />;
       case 'decrease':
-        return '📉';
+        return <Ionicons name="trending-down" size={24} color="#ef4444" />;
       default:
-        return '📝';
+        return <Ionicons name="document-text" size={24} color="#6b7280" />;
     }
   };
 
@@ -95,8 +96,8 @@ export default function HistoryScreen() {
 
       {allTransactions.length === 0 ? (
         <View className="flex-1 items-center justify-center p-6">
-          <Text className="text-6xl mb-4">📊</Text>
-          <Text className="text-xl font-bold text-gray-900 mb-2">
+          <Ionicons name="bar-chart" size={64} color="#9ca3af" />
+          <Text className="text-xl font-bold text-gray-900 mb-2 mt-4">
             No Transactions Yet
           </Text>
           <Text className="text-gray-600 text-center">
@@ -118,9 +119,9 @@ export default function HistoryScreen() {
               >
                 <View className="flex-row items-start justify-between mb-3">
                   <View className="flex-row items-center flex-1">
-                    <Text className="text-2xl mr-3">
+                    <View className="mr-3">
                       {getTransactionIcon(transaction.type)}
-                    </Text>
+                    </View>
                     <View className="flex-1">
                       <Text className="text-lg font-bold text-gray-900 mb-1">
                         {transaction.productName}
@@ -139,8 +140,8 @@ export default function HistoryScreen() {
                       {transaction.type === 'create'
                         ? 'CREATED'
                         : transaction.type === 'increase'
-                        ? 'INCREASE'
-                        : 'DECREASE'}
+                          ? 'INCREASE'
+                          : 'DECREASE'}
                     </Text>
                   </View>
                 </View>
@@ -149,11 +150,10 @@ export default function HistoryScreen() {
                   <View>
                     <Text className="text-sm text-gray-600">Quantity Change</Text>
                     <Text
-                      className={`text-xl font-bold ${
-                        transaction.type === 'increase' || transaction.type === 'create'
-                          ? 'text-green-600'
-                          : 'text-red-600'
-                      }`}
+                      className={`text-xl font-bold ${transaction.type === 'increase' || transaction.type === 'create'
+                        ? 'text-green-600'
+                        : 'text-red-600'
+                        }`}
                     >
                       {transaction.type === 'increase' || transaction.type === 'create'
                         ? '+'

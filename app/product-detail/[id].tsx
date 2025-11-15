@@ -170,7 +170,7 @@ export default function ProductDetailScreen() {
               <View className="flex-row mb-4">
                 <TouchableOpacity
                   onPress={() => handleAdjustQuantity(-1)}
-                  disabled={loading || product.quantity === 0}
+                  disabled={!!(loading || product.quantity === 0)}
                   className={`flex-1 py-3 rounded-lg items-center mr-2 ${
                     loading || product.quantity === 0
                       ? 'bg-gray-200 opacity-50'
@@ -181,7 +181,7 @@ export default function ProductDetailScreen() {
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => handleAdjustQuantity(1)}
-                  disabled={loading}
+                  disabled={!!loading}
                   className={`flex-1 py-3 rounded-lg items-center mr-2 ${
                     loading ? 'bg-gray-200 opacity-50' : 'bg-green-500'
                   }`}
@@ -190,7 +190,7 @@ export default function ProductDetailScreen() {
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => handleAdjustQuantity(-5)}
-                  disabled={loading || product.quantity < 5}
+                  disabled={!!(loading || product.quantity < 5)}
                   className={`flex-1 py-3 rounded-lg items-center mr-2 ${
                     loading || product.quantity < 5
                       ? 'bg-gray-200 opacity-50'
@@ -201,7 +201,7 @@ export default function ProductDetailScreen() {
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => handleAdjustQuantity(5)}
-                  disabled={loading}
+                  disabled={!!loading}
                   className={`flex-1 py-3 rounded-lg items-center ${
                     loading ? 'bg-gray-200 opacity-50' : 'bg-green-500'
                   }`}
@@ -309,7 +309,7 @@ export default function ProductDetailScreen() {
                   <View className="flex-row">
                     <TouchableOpacity
                       onPress={previousPage}
-                      disabled={currentPage === 1}
+                      disabled={!!(currentPage === 1)}
                       className={`flex-1 py-2 rounded-lg mr-2 ${
                         currentPage === 1
                           ? 'bg-gray-200 opacity-50'
@@ -326,7 +326,7 @@ export default function ProductDetailScreen() {
                     </TouchableOpacity>
                     <TouchableOpacity
                       onPress={nextPage}
-                      disabled={currentPage === totalPages}
+                      disabled={!!(currentPage === totalPages)}
                       className={`flex-1 py-2 rounded-lg ${
                         currentPage === totalPages
                           ? 'bg-gray-200 opacity-50'

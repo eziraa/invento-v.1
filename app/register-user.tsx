@@ -68,7 +68,7 @@ export default function RegisterUserScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       className="flex-1 bg-gray-50"
     >
-      <ScrollView className="flex-1" contentContainerClassName="p-6">
+      <ScrollView className="flex-1" contentContainerStyle={{ padding: 24 }}>
         <View className="mb-6">
           <Text className="text-2xl font-bold text-gray-900 mb-2">
             Register New User

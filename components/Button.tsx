@@ -3,7 +3,7 @@
  */
 
 import * as React from 'react';
-import { TouchableOpacity, Text, ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native';
 
 interface ButtonProps {
     title: string;
@@ -24,6 +24,10 @@ export const Button: React.FC<ButtonProps> = ({
     fullWidth = true,
     className = '',
 }) => {
+    // Ensure boolean props are explicitly boolean
+    const isDisabled = !!(disabled || loading);
+    const isLoading = !!loading;
+    const isFullWidth = !!fullWidth;
     const getVariantStyles = () => {
         switch (variant) {
             case 'primary':
@@ -46,20 +50,16 @@ export const Button: React.FC<ButtonProps> = ({
         return 'text-white';
     };
 
+    const classNameString = className || '';
+    const finalClassName = `${getVariantStyles()} ${isFullWidth ? 'w-full' : ''} py-3 px-6 rounded-lg flex-row items-center justify-center ${isDisabled ? 'opacity-50' : ''} ${classNameString}`.trim();
+
     return (
         <TouchableOpacity
             onPress={onPress}
-            disabled={disabled || loading}
-            className={`
-        ${getVariantStyles()}
-        ${fullWidth ? 'w-full' : ''}
-        py-3 px-6 rounded-lg
-        flex-row items-center justify-center
-        ${disabled || loading ? 'opacity-50' : ''}
-        ${className}
-      `}
+            disabled={isDisabled}
+            className={finalClassName}
         >
-            {loading ? (
+            {isLoading ? (
                 <View className="flex-row items-center">
                     <View className="mr-2">
                         <ActivityIndicator

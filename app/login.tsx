@@ -48,9 +48,11 @@ export default function LoginScreen() {
     setErrors({});
 
     try {
+      Alert.alert('Logging In', 'Please wait while we log you in...');
       await login(email, password);
       // Navigation will happen automatically via useEffect
       router.replace('/');
+      Alert.alert('Login Successful', 'You have been logged in successfully.');
     } catch (error) {
       Alert.alert(
         'Login Failed',
@@ -76,7 +78,7 @@ export default function LoginScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       className="flex-1 bg-gray-50"
     >
-      <ScrollView className="flex-1" contentContainerClassName="p-6">
+      <ScrollView className="flex-1" contentContainerStyle={{ padding: 24 }}>
         <View className="flex-1 justify-center">
           <View className="mb-8 items-center">
             <Text className="text-4xl font-bold text-primary-600 mb-2">

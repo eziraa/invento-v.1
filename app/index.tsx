@@ -2,11 +2,11 @@
  * Home screen - Main navigation hub
  */
 
-import React, { useEffect } from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
-import { useRouter } from 'expo-router';
-import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/Button';
+import { useAuth } from '@/hooks/useAuth';
+import { useRouter } from 'expo-router';
+import React, { useEffect } from 'react';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -56,6 +56,7 @@ export default function HomeScreen() {
       color: 'bg-orange-500',
     },
   ];
+
 
   return (
     <View className="flex-1 bg-gray-50">

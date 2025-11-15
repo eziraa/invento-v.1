@@ -43,8 +43,8 @@ export const InputField: React.FC<InputFieldProps> = ({
         placeholderTextColor="#9CA3AF"
         keyboardType={keyboardType}
         autoCapitalize={autoCapitalize}
-        secureTextEntry={secureTextEntry}
-        editable={editable}
+        secureTextEntry={!!secureTextEntry}
+        editable={!!editable}
       />
       {error && (
         <Text className="text-red-500 text-sm mt-1">{error}</Text>

@@ -1,194 +1,50 @@
-# Inventory Management App
+# Welcome to your Expo app 👋
 
-A complete React Native + Expo mobile application for managing inventory, products, and tracking stock transactions.
+This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
-## 🚀 Features
+## Get started
 
-- **User Registration**: Register users with email and full name
-- **Product Management**: Add products with SKU, name, price, and quantity
-- **Stock Adjustment**: Adjust product stock levels with validation (prevents negative quantities)
-- **Product Status**: View detailed product information including SKU, quantity, and last updated timestamp
-- **Transaction History**: View all stock changes with pagination support
-- **Clean UI/UX**: Modern, intuitive interface built with NativeWind
+1. Install dependencies
 
-## 📋 Prerequisites
-
-- Node.js (v16 or higher)
-- npm or yarn
-- Expo CLI (will be installed automatically)
-- iOS Simulator (for Mac) or Android Emulator / Expo Go app on your phone
-
-## 🛠️ Installation
-
-1. **Install dependencies:**
    ```bash
    npm install
    ```
 
-2. **Start the development server:**
+2. Start the app
+
    ```bash
-   npm start
+   npx expo start
    ```
 
-3. **Run on your device:**
-   - Scan the QR code with Expo Go app (iOS/Android)
-   - Or press `i` for iOS simulator
-   - Or press `a` for Android emulator
+In the output, you'll find options to open the app in a
 
-## 📁 Project Structure
+- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
+- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
+- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
+- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
-```
-inventory-management-app/
-├── app/                      # Expo Router screens
-│   ├── _layout.tsx          # Root layout with navigation
-│   ├── index.tsx            # Home screen
-│   ├── register-user.tsx    # User registration
-│   ├── add-product.tsx      # Add new product
-│   ├── products.tsx         # Product list
-│   ├── product-detail/      # Product detail screen
-│   │   └── [id].tsx
-│   └── history.tsx          # Transaction history
-├── components/              # Reusable components
-│   ├── Button.tsx
-│   ├── InputField.tsx
-│   ├── ProductCard.tsx
-│   ├── Pagination.tsx
-│   └── Header.tsx
-├── hooks/                   # Custom React hooks
-│   ├── useUsers.ts
-│   ├── useProducts.ts
-│   └── useTransactions.ts
-├── types/                   # TypeScript type definitions
-│   └── index.ts
-├── utils/                   # Utility functions
-│   ├── validation.ts
-│   ├── formatting.ts
-│   ├── time.ts
-│   └── storage.ts
-├── global.css               # NativeWind global styles
-├── tailwind.config.js       # Tailwind configuration
-├── tsconfig.json            # TypeScript configuration
-├── app.json                 # Expo configuration
-└── package.json
+You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+
+## Get a fresh project
+
+When you're ready, run:
+
+```bash
+npm run reset-project
 ```
 
-## 🏗️ Architecture
+This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-### Design Decisions
+## Learn more
 
-1. **Expo Router**: Used for file-based routing, providing a simple and intuitive navigation structure
-2. **NativeWind**: Tailwind CSS for React Native, enabling rapid UI development with utility classes
-3. **Local State Management**: Pure React hooks (useState, useEffect) for state management - no external libraries needed
-4. **AsyncStorage**: Persistent local storage that simulates backend API behavior with async/await patterns
-5. **TypeScript**: Strong typing throughout for better developer experience and fewer runtime errors
-6. **Modular Architecture**: Separation of concerns with dedicated folders for screens, components, hooks, and utilities
+To learn more about developing your project with Expo, look at the following resources:
 
-### Key Components
+- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
+- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
 
-- **Screens**: Each feature has its own screen component
-- **Reusable Components**: Button, InputField, ProductCard, Pagination for consistent UI
-- **Custom Hooks**: Encapsulate business logic (useUsers, useProducts, useTransactions)
-- **Utilities**: Validation, formatting, time helpers, and mock storage
+## Join the community
 
-### State Management
+Join our community of developers creating universal apps.
 
-- All state is managed locally using React hooks
-- Custom hooks abstract away the complexity of state management
-- AsyncStorage utilities simulate backend API calls with proper async/await patterns
-- **Data persists permanently** - All data is saved to device storage and survives app restarts
-
-### Validation & Error Handling
-
-- Form validation using utility functions
-- Real-time error display in form fields
-- Alert dialogs for success/error messages
-- Prevents negative stock quantities
-- Validates email format, SKU uniqueness, etc.
-
-### Pagination
-
-- Transaction history supports pagination
-- Configurable items per page (default: 10)
-- Page navigation with Previous/Next buttons
-- Page number indicators
-
-## 🎨 UI/UX Features
-
-- **Modern Design**: Clean, professional interface with consistent color scheme
-- **Responsive Layout**: Works on various screen sizes
-- **Visual Feedback**: Loading states, error messages, success alerts
-- **Stock Status Indicators**: Color-coded status (In Stock, Low Stock, Out of Stock)
-- **Transaction Icons**: Visual indicators for different transaction types
-- **Pull to Refresh**: Refresh data by pulling down on lists
-- **Smooth Navigation**: Intuitive navigation flow between screens
-
-## 📝 Code Quality
-
-- **TypeScript**: Full type safety
-- **Modular Code**: Reusable components and hooks
-- **Clean Code Principles**: Single responsibility, DRY, clear naming
-- **Comments**: Important logic is documented
-- **Error Handling**: Comprehensive error handling throughout
-
-## 🔄 Data Flow
-
-1. User interacts with UI
-2. Screen component calls custom hook function
-3. Hook calls storage utility (simulates API)
-4. Storage utility saves/loads data from AsyncStorage (persistent)
-5. Hook updates state
-6. Component re-renders with new data
-
-### Data Persistence
-
-- **AsyncStorage**: All data (users, products, transactions) is stored locally using AsyncStorage
-- **Automatic Persistence**: Data is automatically saved on create/update operations
-- **Data Recovery**: All data persists across app restarts and device reboots
-- **Storage Keys**: Data is stored with keys prefixed with `@inventory_app:`
-- **Error Handling**: Comprehensive error handling for storage operations
-
-## 🧪 Testing the App
-
-1. **Register a User**: Go to "Register User" and create an account
-2. **Add Products**: Navigate to "Add Product" and register some products
-3. **View Products**: Browse all products in the "View Products" screen
-4. **Adjust Stock**: Open a product detail and use +/- buttons or custom adjustment
-5. **View History**: Check transaction history to see all stock changes
-
-## 🚨 Important Notes
-
-- **Persistent Storage**: All data is stored locally using AsyncStorage and persists across app restarts
-- **User Required**: Some features (like adding products) require a registered user
-- **SKU Uniqueness**: SKU must be unique (case-insensitive)
-- **Stock Validation**: Quantity cannot go below zero
-- **Data Persistence**: Your users, products, and transactions are saved locally and will remain even after closing the app
-
-## 📦 Dependencies
-
-- `expo`: Expo SDK
-- `expo-router`: File-based routing
-- `react-native`: React Native framework
-- `nativewind`: Tailwind CSS for React Native
-- `typescript`: TypeScript support
-- `@react-native-async-storage/async-storage`: Persistent local storage
-- `react-native-reanimated`: Animation library
-
-## 🎯 Future Enhancements (Not Implemented)
-
-- ✅ **Persistent storage using AsyncStorage** - **IMPLEMENTED!**
-- Backend API integration
-- User authentication
-- Product search and filtering
-- Export transaction history
-- Product categories
-- Image upload for products
-- Barcode scanning
-
-## 📄 License
-
-This project is created for educational/demonstration purposes.
-
----
-
-**Built with ❤️ using React Native + Expo + NativeWind**
-
+- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
+- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
