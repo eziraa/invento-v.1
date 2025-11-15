@@ -6,9 +6,9 @@
  * Formats a number as currency
  */
 export const formatCurrency = (amount: number): string => {
-  return new Intl.NumberFormat('en-US', {
+  return new Intl.NumberFormat('am-ET', {
     style: 'currency',
-    currency: 'USD',
+    currency: 'ETB',
   }).format(amount);
 };
 

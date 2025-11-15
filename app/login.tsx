@@ -82,7 +82,7 @@ export default function LoginScreen() {
         <View className="flex-1 justify-center">
           <View className="mb-8 items-center">
             <Text className="text-4xl font-bold text-primary-600 mb-2">
-              Inventory Management
+              Invento
             </Text>
             <Text className="text-gray-600 text-center">
               Sign in to continue

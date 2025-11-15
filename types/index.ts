@@ -1,5 +1,5 @@
 /**
- * Type definitions for the Inventory Management App
+ * Type definitions for the Invento App
  */
 
 export interface User {

@@ -1,6 +1,6 @@
-# Welcome to your Expo app 👋
+# Invento - Inventory Management App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is an [Expo](https://expo.dev) project for inventory management with Ethiopian Birr (ETB) currency support.
 
 ## Get started
 

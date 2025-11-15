@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Inventory Management",
-    "slug": "inventory-management",
+    "name": "Invento",
+    "slug": "invento",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -27,7 +27,7 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "scheme": "inventory",
+    "scheme": "invento",
     "plugins": [
       "expo-router"
     ]

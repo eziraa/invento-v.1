@@ -129,7 +129,7 @@ export default function AddProductScreen() {
           />
 
           <InputField
-            label="Price (USD)"
+            label="Price (ETB)"
             value={price}
             onChangeText={(text) => {
               // Allow only numbers and one decimal point

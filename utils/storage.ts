@@ -9,11 +9,11 @@ import { hashPassword, verifyPassword } from '@/utils/auth';
 
 // Storage keys
 const STORAGE_KEYS = {
-  USERS: '@inventory_app:users',
-  PRODUCTS: '@inventory_app:products',
-  TRANSACTIONS: '@inventory_app:transactions',
-  AUTH_TOKEN: '@inventory_app:auth_token',
-  CURRENT_USER: '@inventory_app:current_user',
+  USERS: '@invento_app:users',
+  PRODUCTS: '@invento_app:products',
+  TRANSACTIONS: '@invento_app:transactions',
+  AUTH_TOKEN: '@invento_app:auth_token',
+  CURRENT_USER: '@invento_app:current_user',
 } as const;
 
 /**
