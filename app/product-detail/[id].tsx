@@ -122,10 +122,17 @@ export default function ProductDetailScreen() {
       <ScrollView className="flex-1">
       {/* Product Info Card */}
       <View className="bg-white rounded-xl shadow-lg p-6 mb-4 mx-4 mt-4">
-        <View className="flex-row justify-end items-start mb-4">
+        <View className="flex-row justify-between items-start mb-4">
           <View className={`px-3 py-2 rounded-lg border ${status.color}`}>
             <Text className="text-sm font-semibold">{status.text}</Text>
           </View>
+          {/* Edit Button */}
+          <TouchableOpacity
+            onPress={() => router.push({ pathname: '/edit-product', params: { productId: product.id } })}
+            className="ml-3 px-3 py-2 bg-primary-600 rounded-lg"
+          >
+            <Text className="text-white text-sm font-semibold">Edit</Text>
+          </TouchableOpacity>
         </View>
 
         <View className="flex-row justify-between items-center py-4 border-t border-b border-gray-200 my-4">

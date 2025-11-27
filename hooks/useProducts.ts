@@ -2,9 +2,9 @@
  * Custom hook for managing products
  */
 
-import { useState, useEffect, useCallback } from 'react';
 import { Product } from '@/types';
 import { productStorage } from '@/utils/storage';
+import { useCallback, useEffect, useState } from 'react';
 
 export const useProducts = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -91,6 +91,21 @@ export const useProducts = () => {
     loadProducts();
   }, [loadProducts]);
 
+  const updateProduct = useCallback(async (updatedProduct: Product) => {
+    setLoading(true);
+    setError(null);
+    try {
+      await productStorage.update(updatedProduct.id, updatedProduct);
+      await loadProducts();
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to update product';
+      setError(errorMessage);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  }, [loadProducts]);
+
   return {
     products,
     loading,
@@ -99,6 +114,7 @@ export const useProducts = () => {
     getProductById,
     createProduct,
     adjustQuantity,
+    updateProduct,
   };
 };
 
