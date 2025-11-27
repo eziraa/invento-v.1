@@ -1,16 +1,14 @@
-/**
- * Products list screen
- */
 
-import * as React from 'react';
-import  { useEffect } from 'react';
-import { View, Text, ScrollView, RefreshControl, ActivityIndicator } from 'react-native';
-import { useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
-import { useProducts } from '@/hooks/useProducts';
-import { ProductCard } from '@/components/ProductCard';
+
 import { Button } from '@/components/Button';
 import { Header } from '@/components/Header';
+import { ProductCard } from '@/components/ProductCard';
+import { useProducts } from '@/hooks/useProducts';
+import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
+import * as React from 'react';
+import { useEffect } from 'react';
+import { ActivityIndicator, RefreshControl, ScrollView, Text, View } from 'react-native';
 
 export default function ProductsScreen() {
   const router = useRouter();

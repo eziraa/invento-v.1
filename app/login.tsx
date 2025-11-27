@@ -1,16 +1,14 @@
-/**
- * Login screen
- */
 
-import * as React from 'react';
-import  { useState, useEffect } from 'react';
-import { View, Text, ScrollView, Alert, KeyboardAvoidingView, Platform } from 'react-native';
-import { useRouter } from 'expo-router';
-import { useAuth } from '@/hooks/useAuth';
-import { InputField } from '@/components/InputField';
+
 import { Button } from '@/components/Button';
-import { validateEmail } from '@/utils/validation';
+import { InputField } from '@/components/InputField';
+import { useAuth } from '@/hooks/useAuth';
 import { FormErrors } from '@/types';
+import { validateEmail } from '@/utils/validation';
+import { useRouter } from 'expo-router';
+import * as React from 'react';
+import { useEffect, useState } from 'react';
+import { Alert, KeyboardAvoidingView, Platform, ScrollView, Text, View } from 'react-native';
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -133,7 +131,7 @@ export default function LoginScreen() {
 
           <View className="bg-white rounded-xl shadow-md p-6">
             <Text className="text-gray-600 text-center mb-4">
-              Don't have an account?
+              Don&apos;t have an account?
             </Text>
             <Button
               title="Create Account"

@@ -1,14 +1,11 @@
-/**
- * User Profile Screen
- */
 
-import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Alert } from 'react-native';
-import { useRouter } from 'expo-router';
-import { useAuth } from '@/hooks/useAuth';
+
 import { Header } from '@/components/Header';
+import { useAuth } from '@/hooks/useAuth';
 import { Ionicons } from '@expo/vector-icons';
-import { formatDateTime } from '@/utils/time';
+import { useRouter } from 'expo-router';
+import React from 'react';
+import { Alert, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
 export default function ProfileScreen() {
   const router = useRouter();

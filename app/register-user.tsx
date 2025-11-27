@@ -1,17 +1,14 @@
-/**
- * User registration screen
- */
 
+import { Button } from '@/components/Button';
+import { InputField } from '@/components/InputField';
+import { useAuth } from '@/hooks/useAuth';
+import { FormErrors } from '@/types';
+import { validatePassword } from '@/utils/auth';
+import { validateUserForm } from '@/utils/validation';
+import { useRouter } from 'expo-router';
 import * as React from 'react';
 import { useState } from 'react';
-import { View, Text, ScrollView, Alert, KeyboardAvoidingView, Platform } from 'react-native';
-import { useRouter } from 'expo-router';
-import { useAuth } from '@/hooks/useAuth';
-import { InputField } from '@/components/InputField';
-import { Button } from '@/components/Button';
-import { validateUserForm } from '@/utils/validation';
-import { validatePassword } from '@/utils/auth';
-import { FormErrors } from '@/types';
+import { Alert, KeyboardAvoidingView, Platform, ScrollView, Text, View } from 'react-native';
 
 export default function RegisterUserScreen() {
   const router = useRouter();

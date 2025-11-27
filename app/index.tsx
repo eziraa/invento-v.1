@@ -1,14 +1,12 @@
-/**
- * Home screen - Main navigation hub
- */
+
 
 import { Button } from '@/components/Button';
+import { Header } from '@/components/Header';
 import { useAuth } from '@/hooks/useAuth';
+import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import React, { useEffect } from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { Header } from '@/components/Header';
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -35,13 +33,13 @@ export default function HomeScreen() {
     return null;
   }
 
-  const menuItems: Array<{
+  const menuItems: {
     title: string;
     description: string;
     route: string;
     icon: keyof typeof Ionicons.glyphMap;
     color: string;
-  }> = [
+  }[] = [
     {
       title: 'Add Product',
       description: 'Register a new product',

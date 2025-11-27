@@ -1,16 +1,14 @@
-/**
- * Add product screen
- */
 
-import React, { useState } from 'react';
-import { View, Text, ScrollView, Alert, KeyboardAvoidingView, Platform } from 'react-native';
-import { useRouter } from 'expo-router';
+
+import { Button } from '@/components/Button';
+import { InputField } from '@/components/InputField';
 import { useAuth } from '@/hooks/useAuth';
 import { useProducts } from '@/hooks/useProducts';
-import { InputField } from '@/components/InputField';
-import { Button } from '@/components/Button';
-import { validateProductForm } from '@/utils/validation';
 import { FormErrors } from '@/types';
+import { validateProductForm } from '@/utils/validation';
+import { useRouter } from 'expo-router';
+import React, { useState } from 'react';
+import { Alert, KeyboardAvoidingView, Platform, ScrollView, Text, View } from 'react-native';
 
 export default function AddProductScreen() {
   const router = useRouter();

@@ -2,12 +2,12 @@
  * Product card component for displaying product information
  */
 
-import * as React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
 import { Product } from '@/types';
 import { formatCurrency, formatNumber } from '@/utils/formatting';
 import { formatRelativeTime } from '@/utils/time';
 import { useRouter } from 'expo-router';
+import * as React from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 interface ProductCardProps {
   product: Product;
@@ -29,8 +29,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const status = getStockStatus();
 
   return (
-    <TouchableOpacity
-      onPress={() => router.push(`/product-detail/${product.id}`)}
+      <TouchableOpacity
+      onPress={() => router.push(`/product-detail/${product.id}?productName=${encodeURIComponent(product.name)}`)}
       className="bg-white rounded-xl shadow-md p-4 mb-3 border border-gray-200"
     >
       <View className="flex-row justify-between items-start mb-2">

@@ -1,9 +1,9 @@
+import { storageUtils } from '@/utils/storage';
 import { Stack } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { View, ActivityIndicator, Text } from 'react-native';
+import { ActivityIndicator, Text, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import '../global.css';
-import { storageUtils } from '@/utils/storage';
 
 export default function RootLayout() {
   const [isInitialized, setIsInitialized] = useState(false);
@@ -56,7 +56,7 @@ export default function RootLayout() {
             headerShown: false, 
           }} 
         />
-        {/* <Stack.Screen 
+        <Stack.Screen 
           name="login" 
           options={{ 
             title: 'Login',
@@ -77,12 +77,14 @@ export default function RootLayout() {
         />
         <Stack.Screen 
           name="product-detail/[id]" 
-          options={{ title: 'Product Details' }} 
+          options={({ route }: { route: { params?: { productName?: string } } }) => ({ 
+            title: route.params?.productName ? `${route.params.productName}` : 'Product Details'
+          })}
         />
         <Stack.Screen 
           name="history" 
           options={{ title: 'Transaction History' }} 
-        /> */}
+        />
       </Stack>
     </SafeAreaProvider>
   );

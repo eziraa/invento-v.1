@@ -71,7 +71,7 @@ export const Header: React.FC<HeaderProps> = ({
           <View className="relative">
             <TouchableOpacity
               onPress={() => setDropdownVisible(true)}
-              className="flex-row items-center bg-primary-700 rounded-full px-3 py-2 ml-2"
+              className={"flex-row items-center bg-primary-700 rounded-full px-3 py-2 ml-2"}
             >
               <View className="bg-primary-500 w-8 h-8 rounded-full items-center justify-center mr-2">
                 <Text className="text-white text-xs font-bold">

@@ -1,15 +1,13 @@
-/**
- * Transaction history screen with pagination
- */
 
-import React, { useEffect } from 'react';
-import { View, Text, ScrollView, RefreshControl, ActivityIndicator } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { useTransactions } from '@/hooks/useTransactions';
+
+import { Header } from '@/components/Header';
 import { Pagination } from '@/components/Pagination';
+import { useTransactions } from '@/hooks/useTransactions';
 import { Transaction } from '@/types';
 import { formatDateTime } from '@/utils/time';
-import { Header } from '@/components/Header';
+import { Ionicons } from '@expo/vector-icons';
+import React, { useEffect } from 'react';
+import { ActivityIndicator, RefreshControl, ScrollView, Text, View } from 'react-native';
 
 export default function HistoryScreen() {
   const {
@@ -41,7 +39,7 @@ export default function HistoryScreen() {
   const getTransactionIcon = (type: Transaction['type']) => {
     switch (type) {
       case 'create':
-        return <Ionicons name="sparkles" size={24} color="#3b82f6" />;
+        return <Ionicons name="checkmark-circle-outline" size={24} color="#22c55e" />;
       case 'increase':
         return <Ionicons name="trending-up" size={24} color="#22c55e" />;
       case 'decrease':

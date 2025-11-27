@@ -1,20 +1,18 @@
-/**
- * Product detail screen with stock adjustment
- */
-import * as React from 'react';
-import  { useState, useEffect } from 'react';
-import { View, Text, ScrollView, Alert, ActivityIndicator, TouchableOpacity } from 'react-native';
-import { useLocalSearchParams, useRouter } from 'expo-router';
+
+import { Button } from '@/components/Button';
+import { Header } from '@/components/Header';
+import { InputField } from '@/components/InputField';
 import { useAuth } from '@/hooks/useAuth';
 import { useProducts } from '@/hooks/useProducts';
 import { useTransactions } from '@/hooks/useTransactions';
-import { InputField } from '@/components/InputField';
-import { Button } from '@/components/Button';
+import { Transaction } from '@/types';
 import { formatCurrency, formatNumber } from '@/utils/formatting';
 import { formatDateTime } from '@/utils/time';
-import { Transaction } from '@/types';
 import { Ionicons } from '@expo/vector-icons';
-import { Header } from '@/components/Header';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import * as React from 'react';
+import { useEffect, useState } from 'react';
+import { ActivityIndicator, Alert, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
 export default function ProductDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
