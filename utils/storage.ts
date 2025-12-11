@@ -3,9 +3,9 @@
  * Simulates backend API behavior with local persistence
  */
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { User, Product, Transaction } from '@/types';
+import { Product, Transaction, User } from '@/types';
 import { hashPassword, verifyPassword } from '@/utils/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Storage keys
 const STORAGE_KEYS = {
@@ -500,6 +500,15 @@ export const storageUtils = {
       }
     } catch (error) {
       console.error('Error initializing storage:', error);
+    }
+  },
+
+  get: async (key: string): Promise<string | null> => {
+    try {
+      return await AsyncStorage.getItem(key);
+    } catch (error) {
+      console.error(`Error getting key ${key}:`, error);
+      return null;
     }
   },
 };

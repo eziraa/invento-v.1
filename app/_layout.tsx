@@ -7,16 +7,18 @@ import '../global.css';
 
 export default function RootLayout() {
   const [isInitialized, setIsInitialized] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
   useEffect(() => {
-    // Initialize AsyncStorage on app start
     const initializeStorage = async () => {
       try {
         await storageUtils.initialize();
-        setIsInitialized(true);
+        const token = await storageUtils.get('authToken'); // adjust to your key
+        setIsAuthenticated(!!token);
       } catch (error) {
         console.error('Failed to initialize storage:', error);
-        // Still set initialized to true to allow app to continue
+        setIsAuthenticated(false);
+      } finally {
         setIsInitialized(true);
       }
     };
@@ -24,8 +26,7 @@ export default function RootLayout() {
     initializeStorage();
   }, []);
 
-  // Show loading screen while initializing
-  if (!isInitialized) {
+  if (!isInitialized || isAuthenticated === null) {
     return (
       <SafeAreaProvider>
         <View className="flex-1 items-center justify-center bg-gray-50">
@@ -38,55 +39,15 @@ export default function RootLayout() {
 
   return (
     <SafeAreaProvider>
-      <Stack
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: '#0ea5e9',
-          },
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
-        }}
-      >
-        <Stack.Screen 
-          name="index" 
-          options={{ 
-            title: 'Home',
-            headerShown: false, 
-          }} 
-        />
-        <Stack.Screen 
-          name="login" 
-          options={{ 
-            title: 'Login',
-            headerShown: false,
-          }} 
-        />
-        <Stack.Screen 
-          name="register-user" 
-          options={{ title: 'Register User' }} 
-        />
-        <Stack.Screen 
-          name="add-product" 
-          options={{ title: 'Add Product' }} 
-        />
-        <Stack.Screen 
-          name="products" 
-          options={{ title: 'Products' }} 
-        />
-        <Stack.Screen 
-          name="product-detail/[id]" 
-          options={({ route }: { route: { params?: { productName?: string } } }) => ({ 
-            title: route.params?.productName ? `${route.params.productName}` : 'Product Details'
-          })}
-        />
-        <Stack.Screen 
-          name="history" 
-          options={{ title: 'Transaction History' }} 
-        />
+      <Stack screenOptions={{ headerShown: false }}>
+        {isAuthenticated ? (
+          // Show the tabs group; this will render app/(tabs)/_layout.tsx
+          <Stack.Screen name="(tabs)" />
+        ) : (
+          // Show the auth group; these screens are NOT in the tab bar
+          <Stack.Screen name="(auth)" />
+        )}
       </Stack>
     </SafeAreaProvider>
   );
 }
-

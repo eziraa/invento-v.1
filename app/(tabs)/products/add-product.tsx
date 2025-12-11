@@ -85,7 +85,7 @@ export default function AddProductScreen() {
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       className="flex-1 bg-gray-50"
     >
       <ScrollView className="flex-1" contentContainerStyle={{ padding: 24 }}>

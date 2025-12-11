@@ -43,7 +43,7 @@ export default function HomeScreen() {
     {
       title: 'Add Product',
       description: 'Register a new product',
-      route: '/add-product',
+      route: '/products/add-product',
       icon: 'add-circle',
       color: 'bg-green-500',
     },
@@ -110,7 +110,7 @@ export default function HomeScreen() {
               <View className="flex-1 mr-2">
                 <Button
                   title="Add Product"
-                  onPress={() => router.push('/add-product')}
+                  onPress={() => router.push('/products/add-product')}
                   variant="primary"
                   fullWidth={true}
                 />
